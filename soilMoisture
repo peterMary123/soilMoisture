@@ -1,0 +1,97 @@
+// Define the pin where the soil moisture sensor is connected
+#define MOISTURE_SENSOR_PIN34 34
+#define MOISTURE_SENSOR_PIN35 35
+#define MOISTURE_SENSOR_PIN32 32
+#define MOISTURE_SENSOR_PIN33 33
+
+#define RESET_PIN_25 25
+#define RESET_PIN_26 26
+#define RESET_PIN_27 14
+
+int minMoisture1 = 10000;
+int maxMoisture1 = 0;
+
+int minMoisture2 = 10000;
+int maxMoisture2 = 0;
+
+int minMoisture3 = 10000;
+int maxMoisture3 = 0;
+
+int minMoisture4 = 10000;
+int maxMoisture4 = 0;
+
+
+
+void setup() {
+  // Initialize serial communication at 115200 bits per second:
+  Serial.begin(115200);
+    // pinMode(RESET_PIN_25, OUTPUT);
+    // pinMode(RESET_PIN_26, OUTPUT);
+    // pinMode(RESET_PIN_27, OUTPUT);
+}
+
+void loop() {
+  // Read the value from the moisture sensor
+  int moistureValue1 = analogRead(MOISTURE_SENSOR_PIN34);
+  int moistureValue2 = analogRead(MOISTURE_SENSOR_PIN35);
+  int moistureValue3 = analogRead(MOISTURE_SENSOR_PIN32);
+  int moistureValue4 = analogRead(MOISTURE_SENSOR_PIN33);
+  
+
+  // Map the value from the sensor to a 0-100 range (0 is dry, 100 is wet)
+    // Adjust the 0 and 4095 values if calibration indicates different min/max values
+    int soilMoisturePercent1 = map(moistureValue1, 1341, 2341, 100, 0);
+    int soilMoisturePercent2 = map(moistureValue2, 1300, 2450, 100, 0);
+
+    // Moisture sensor 1
+    if ( minMoisture1 > moistureValue1){ minMoisture1 = moistureValue1;  }
+    if ( maxMoisture1 < moistureValue1) { maxMoisture1 = moistureValue1;  }
+
+    //Moisture sensor 2
+    if ( minMoisture2 > moistureValue2){ minMoisture2 = moistureValue2;  }
+    if ( maxMoisture2 < moistureValue2) { maxMoisture2 = moistureValue2;  }
+
+    //Moisture sensor 3
+    if ( minMoisture3 > moistureValue3){ minMoisture3 = moistureValue3;  }
+    if ( maxMoisture3 < moistureValue3) { maxMoisture3 = moistureValue3;  }
+
+    //Moisture sensor 2
+    if ( minMoisture4 > moistureValue4){ minMoisture4 = moistureValue4;  }
+    if ( maxMoisture4 < moistureValue4) { maxMoisture4 = moistureValue4;  }
+
+    // int whatWeShow = 0;
+    // if (soilMoisturePercent1 > 100) { whatWeShow = 100;} 
+    // else if (soilMoisturePercent1 < 0) {    whatWeShow = 0; } 
+    // else { whatWeShow = soilMoisturePercent1;  }
+
+
+    // String howWetIsTheSoil;
+    // if (soilMoisturePercent1 < 20) {    howWetIsTheSoil = "Very Dry";  } 
+    // else if (soilMoisturePercent1 >= 20 && soilMoisturePercent1 < 40) { howWetIsTheSoil = "Dry"; } 
+    // else if (soilMoisturePercent1 >= 40 && soilMoisturePercent1 < 60) { howWetIsTheSoil = "Wet"; } 
+    // else if (soilMoisturePercent1 >= 60 && soilMoisturePercent1 < 80) { howWetIsTheSoil = "Very Wet"; } 
+    // else if (soilMoisturePercent1 >= 80) { howWetIsTheSoil = "Over Watered"; }
+
+    // Print out the moisture percentage to the serial monitor
+    // Serial.print("Soil Moisture (%): ");
+    // Serial.print(soilMoisturePercent1);
+    // Serial.print("  -   ");
+    // Serial.print(moistureValue1);
+    // Serial.print("  ");
+    //Serial.println("Min: " +String(minMoisture1) + " - Max:" + String(maxMoisture1) + " - Show:" + String(whatWeShow) + "% - Condition: " + howWetIsTheSoil );  
+    // Serial.println("Moisture1: " + String((int)soilMoisturePercent1) + "   Moisture2: " + String((int)soilMoisturePercent2));
+
+
+//Serial.println("Min-Max1: " + String(minMoisture1) + " - " + String(maxMoisture1) + " - Show:" + String(soilMoisturePercent1) + " --- " + String(minMoisture2) + " - " + String(maxMoisture2) + " - Show:" + String(soilMoisturePercent2) );
+  
+//  Serial.println(String(minMoisture1) + " " + String(maxMoisture1) + " -" + String(moistureValue1) +  " " + String(minMoisture2) + " " + String(maxMoisture2) + " -" + String(moistureValue2) +  " " + String(minMoisture3) + " " + String(maxMoisture3) + " -" + String(moistureValue3)  +  " " + String(minMoisture4) + " " + String(maxMoisture4) + " -" + String(moistureValue4)); 
+  Serial.println(String(moistureValue1) + " " + String(moistureValue2) + " " + String(moistureValue3)  +  " " + String(moistureValue4)); 
+  delay(500);
+    // digitalWrite(RESET_PIN_25, LOW);
+    // digitalWrite(RESET_PIN_26, LOW);
+    // digitalWrite(RESET_PIN_27, LOW);
+    // delay(500);
+    // digitalWrite(RESET_PIN_25, HIGH);
+    // digitalWrite(RESET_PIN_26, HIGH);
+    // digitalWrite(RESET_PIN_27, HIGH);
+}
