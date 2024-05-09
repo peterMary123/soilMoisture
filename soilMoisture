@@ -20,7 +20,10 @@ int maxMoisture3 = 0;
 int minMoisture4 = 10000;
 int maxMoisture4 = 0;
 
+int minMoisture5 = 10000;
+int maxMoisture5 = 0;
 
+int moistureTest = "hello";
 
 void setup() {
   // Initialize serial communication at 115200 bits per second:
